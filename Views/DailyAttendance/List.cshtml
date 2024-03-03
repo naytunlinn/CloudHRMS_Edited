@@ -1,0 +1,50 @@
+﻿@model IList<DailyAttendanceViewModel>
+@if (TempData["info"] != null)
+{
+    <div class="alert alert-info">
+        <h3>@TempData["info"]</h3>
+    </div>
+}
+<h1>DailyAttendance Information</h1>
+<Table class="table table-dark table-striped" id="DailyAttendanceTable">
+    <Thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Department</th>
+            <th scope="col">In Time</th>
+            <th scope="col">Out Time</th>
+            <th scope="col">Attendance Date</th>
+        </tr>
+    </Thead>
+    @{
+        int index = 1;
+    }
+    <Tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">@index</td>      
+                <td scope="col">@item.EmployeeInfo</td>
+                <td scope="col">@item.DepartmentInfo</td>
+                <td scope="col">@item.InTime</td>
+                <td scope="col">@item.OutTime</td>
+                <td scope="col">@item.AttendanceDate</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-danger" asp-area="" asp-controller="DailyAttendance" asp-action="Delete"
+                           aria-current="page" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-primary" asp-controller="DailyAttendance" asp-action="Edit"
+                           asp-route-id="@item.Id aria-current=" page">Edit</a>
+                    </div>
+                </td>
+            </tr>
+            index++;
+        }
+    </Tbody>
+</Table>
+<script>
+    $(document).ready(function () {
+        $('#DailyAttendanceTable').DataTable();
+    });
+</script>

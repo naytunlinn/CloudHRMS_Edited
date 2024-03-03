@@ -1,0 +1,48 @@
+﻿<div>
+    <h1>Entry Daily Attendance</h1>
+    @if (ViewBag.Info != null)
+    {
+        <div class="alert alert-info">
+            @ViewBag.Info
+        </div>
+    }
+    <form action="/DailyAttendance/Entry" method="post">
+       
+        <div class="mb-3">
+            <label for="AttendanceDate">Attendance Date</label>
+            <input id="AttendanceDate" class="form-control" type="date" value="@DateTime.Now.Date" required>
+        </div>
+        <div class="mb-3">
+            <label for="Department" class="form-label">Department</label>
+            <select name="DepartmentId" class="form-select">
+                <option value="x" selected>--select department--</option>
+                @foreach (var department in ViewBag.Departments)
+                {
+                    <option value="@department.Id">@department.Code</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="Employee" class="form-label">Employee Name</label>
+            <select name="DepartmentId" class="form-select">
+                <option value="x" selected>--select Employee--</option>
+                @foreach (var employee in ViewBag.Employees)
+                {
+                    <option value="@employee.Id">@employee.Code | @employee.Name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="InTime">In Time</label>
+            <input id="InTime" class="form-control" type="time" required>
+        </div>
+        <div class="mb-3">
+            <label for="OutTime">Out Time</label>
+            <input id="OutTime" class="form-control" type="time" required>
+        </div>
+              <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Entry</button>
+            <button class="btn btn-danger">Cancel</button>
+        </div>
+    </form>
+</div>
