@@ -28,7 +28,7 @@ namespace CloudHRMS.Services
                     Id = Guid.NewGuid().ToString(),
                     Code = departmentViewModel.Code,
                     Name = departmentViewModel.Name,
-                    Level = departmentViewModel.Level
+                    ExtensionPhone = departmentViewModel.ExtensionPhone,
                 };
                 _departmentRepository.Create(department);
             }
@@ -51,18 +51,19 @@ namespace CloudHRMS.Services
                      Id = s.Id,
                      Code = s.Code,
                      Name = s.Name,
-                     Level = s.Level,
+                     ExtensionPhone = s.ExtensionPhone,
                  }).ToList();
         }
 
         public DepartmentViewModel GetById(string id)
         {
-            var positonEntity = _departmentRepository.GetById(id);
+            var departmentEntity = _departmentRepository.GetById(id);
             return new DepartmentViewModel()
             {
-                Id = positonEntity.Id,
-                Code = positonEntity.Code,
-                Level = positonEntity.Level,
+                Id = departmentEntity.Id,
+                Code = departmentEntity.Code,
+                Name = departmentEntity.Name,
+                ExtensionPhone = departmentEntity.ExtensionPhone,
             };
         }
 
@@ -72,8 +73,8 @@ namespace CloudHRMS.Services
             {
                 Id = departmentViewModel.Id,
                 Code = departmentViewModel.Code,
-                Level = departmentViewModel.Level,
-                ModifiedAt = DateTime.Now
+                Name = departmentViewModel.Name,
+                ExtensionPhone = departmentViewModel.ExtensionPhone,
             };
             _departmentRepository.Update(department);
         }
